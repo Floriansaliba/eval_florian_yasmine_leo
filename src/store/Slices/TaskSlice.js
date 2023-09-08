@@ -26,14 +26,32 @@ const TaskSlice = createSlice({
       });
       state.tasks = copy2;
     },
-    sortTaskByState(state, action) {
-      if (action.payload.state) {
-        state.tasks.sort();
+    sortTask(state, action) {
+      if (action.payload.priority) {
+        state.tasks.sort((a, b) => {
+          if (a.priority < b.priority) {
+            return -1;
+          }
+          if (a.priority > b.priority) {
+            return 1;
+          }
+          return 0;
+        });
+      }
+      if (action.payload.checked) {
+        state.tasks.sort((a, b) => {
+          if (a.validate < b.validate) {
+            return -1;
+          }
+          if (a.validate > b.validate) {
+            return 1;
+          }
+          return 0;
+        });
       }
     },
   },
 });
 
-export const { addTask, modifyTask, deleteTask, sortTaskByState } =
-  TaskSlice.actions;
+export const { addTask, modifyTask, deleteTask, sortTask } = TaskSlice.actions;
 export default TaskSlice;

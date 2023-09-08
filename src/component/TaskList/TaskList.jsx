@@ -1,12 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { selectTasks } from '../../store/Selectors/taskSelectors';
 import { NavLink } from 'react-router-dom';
-import {
-  deleteTask,
-  modifyTask,
-  sortTaskByState,
-} from '../../store/Slices/TaskSlice';
-import { useEffect, useState } from 'react';
+import { deleteTask, modifyTask, sortTask } from '../../store/Slices/TaskSlice';
+import { useState } from 'react';
 
 export default function TaskList() {
   const tasks = useSelector(selectTasks);
@@ -29,21 +25,20 @@ export default function TaskList() {
     dispatch(modifyTask(newTask));
   };
 
-  useEffect(() => {
-    console.log(filters);
-  }, [filters]);
-
   return (
     <>
       <button
-        onClick={() => setFilters({ ...filters, priority: !filters.priority })}
+        onClick={() => {
+          setFilters({ ...filters, priority: !filters.priority });
+          dispatch(sortTask(filters));
+        }}
       >
         Sort by priority
       </button>
       <button
         onClick={() => {
           setFilters({ ...filters, checked: !filters.checked });
-          dispatch(sortTaskByState(filters));
+          dispatch(sortTask(filters));
         }}
       >
         Sort by state
