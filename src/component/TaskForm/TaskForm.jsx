@@ -4,11 +4,15 @@ import { addTask } from '../../store/Slices/TaskSlice';
 
 export default function TaskForm() {
   const dispatch = useDispatch();
-  const [task, setTask] = useState({
+
+  const initialState = {
     title: '',
     description: '',
     priority: 'Classique',
-  });
+    validate: false,
+  };
+
+  const [task, setTask] = useState(initialState);
 
   const handleTitleChange = (e) => {
     const value = e.target.value;
@@ -31,6 +35,7 @@ export default function TaskForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addTask(task));
+    setTask(initialState);
   };
 
   return (
