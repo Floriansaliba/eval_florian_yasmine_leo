@@ -8,7 +8,7 @@ const navStyle = ({ isActive }) => {
 
 const Nav = () => {
   return (
-    <nav className={'nav'}>
+    <nav className='w-full bg-white p-4 text-gray-700 gap-6 flex justify-end items-center'>
       <NavLink style={navStyle} className={'nav_link'} to={'/'}>
         Nouvelle tâche
       </NavLink>

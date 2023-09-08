@@ -40,34 +40,52 @@ export default function TaskForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <h1>Création de la tâche</h1>
-        <label>
-          Titre de la tâche :
+      <form
+        onSubmit={handleSubmit}
+        className='bg-gray-300 border rounded-md flex flex-col p-9 text-gray-900'
+      >
+        <h1 className='mb-6'>Création de la tâche</h1>
+        <div className='flex flex-col gap-6 my-8'>
+          <label className='flex justify-between items-center text-lg font-light'>
+            Titre de la tâche :
+            <input
+              className='ml-4 text-white bg-gray-500 border border-gray-900 rounded p-2'
+              type={'text'}
+              onChange={handleTitleChange}
+              value={task.title}
+              name='title'
+              required
+            ></input>
+          </label>
+          <label className='flex justify-between items-center text-lg font-light'>
+            Description de la tâche :
+            <input
+              className='ml-4 text-white bg-gray-500 border border-gray-900 rounded p-2'
+              type='text'
+              onChange={handleDescriptionChange}
+              value={task.description}
+              name='description'
+            ></input>
+          </label>
+          <label className='flex justify-between items-center text-lg font-light'>
+            Priorité
+            <select
+              className='ml-4 text-white bg-gray-500 border border-gray-900 rounded p-2'
+              name=''
+              id=''
+              onChange={handlePriorityChange}
+            >
+              <option value='Classique'>Classique</option>
+              <option value='Important'>Important</option>
+              <option value='Urgent'>Urgent</option>
+              <option value='Très urgent'>Très urgent</option>
+            </select>
+          </label>
           <input
-            type={'text'}
-            onChange={handleTitleChange}
-            value={task.title}
-            name='title'
-            required
-          ></input>
-        </label>
-        <label>
-          Description de la tâche :
-          <input
-            type='text'
-            onChange={handleDescriptionChange}
-            value={task.description}
-            name='description'
-          ></input>
-        </label>
-        <select name='' id='' onChange={handlePriorityChange}>
-          <option value='Classique'>Classique</option>
-          <option value='Important'>Important</option>
-          <option value='Urgent'>Urgent</option>
-          <option value='Très urgent'>Très urgent</option>
-        </select>
-        <input type='submit' />
+            className='cursor-pointer border rounded-md w-1/2 mx-auto p-3'
+            type='submit'
+          />
+        </div>
       </form>
     </>
   );
